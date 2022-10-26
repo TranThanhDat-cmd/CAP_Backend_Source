@@ -1,0 +1,11 @@
+namespace CAP_Backend_Source.Areas.HelpPage.ModelDescriptions
+{
+    public class EnumValueDescription
+    {
+        public string Documentation { get; set; }
+
+        public string Name { get; set; }
+
+        public string Value { get; set; }
+    }
+}
