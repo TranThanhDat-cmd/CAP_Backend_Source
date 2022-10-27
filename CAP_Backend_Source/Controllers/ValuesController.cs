@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace CAP_Backend_Source.Controllers
@@ -10,8 +11,11 @@ namespace CAP_Backend_Source.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         public IEnumerable<string> Get()
         {
+            var identity = (ClaimsIdentity)User.Identity;
+
             return new string[] { "value1", "value2" };
         }
 
