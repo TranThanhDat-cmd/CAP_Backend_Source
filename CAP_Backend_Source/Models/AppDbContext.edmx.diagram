@@ -4,8 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="73a7d60d46474b41a794abbb4c8cc02f" Name="Diagram1">
-        <EntityTypeShape EntityType="CP25Team02Model.Account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="73a7d60d46474b41a794abbb4c8cc02f" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="CP25Team02Model.Account" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="CP25Team02Model.Category" Width="1.5" PointX="3" PointY="10.5" />
+        <EntityTypeShape EntityType="CP25Team02Model.ContentProgram" Width="1.5" PointX="7.5" PointY="11.375" />
+        <EntityTypeShape EntityType="CP25Team02Model.EssayAnswer" Width="1.5" PointX="5.25" PointY="5.375" />
+        <EntityTypeShape EntityType="CP25Team02Model.EssayQuestion" Width="1.5" PointX="12.25" PointY="4.625" />
+        <EntityTypeShape EntityType="CP25Team02Model.Faculty" Width="1.5" PointX="3" PointY="12.875" />
+        <EntityTypeShape EntityType="CP25Team02Model.Learner" Width="1.5" PointX="7.5" PointY="7.75" />
+        <EntityTypeShape EntityType="CP25Team02Model.MultipleChoiceAnswer" Width="1.5" PointX="5.25" PointY="15.625" />
+        <EntityTypeShape EntityType="CP25Team02Model.MultipleChoiceQuestion" Width="1.5" PointX="12.25" PointY="1.125" />
+        <EntityTypeShape EntityType="CP25Team02Model.Program" Width="1.5" PointX="5.25" PointY="8.5" />
+        <EntityTypeShape EntityType="CP25Team02Model.Role" Width="1.5" PointX="0.75" PointY="6.625" />
+        <EntityTypeShape EntityType="CP25Team02Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CP25Team02Model.Test" Width="1.5" PointX="10" PointY="2.625" />
+        <EntityTypeShape EntityType="CP25Team02Model.Type" Width="1.5" PointX="7.75" PointY="2.875" />
+        <AssociationConnector Association="CP25Team02Model.FK_Account_Role" />
+        <AssociationConnector Association="CP25Team02Model.FK_EssayAnswers_Account" />
+        <AssociationConnector Association="CP25Team02Model.FK_Learner_Account" />
+        <AssociationConnector Association="CP25Team02Model.FK_Learner_Account1" />
+        <AssociationConnector Association="CP25Team02Model.FK_MultipleChoiceAnswers_Account" />
+        <AssociationConnector Association="CP25Team02Model.FK_Program_Account" />
+        <AssociationConnector Association="CP25Team02Model.FK_Program_Category" />
+        <AssociationConnector Association="CP25Team02Model.FK_ContentProgram_Program" />
+        <AssociationConnector Association="CP25Team02Model.FK_EssayQuestions_Test" />
+        <AssociationConnector Association="CP25Team02Model.FK_Program_Faculty" />
+        <AssociationConnector Association="CP25Team02Model.FK_Learner_Program" />
+        <AssociationConnector Association="CP25Team02Model.FK_MultipleChoiceQuestions_Test" />
+        <AssociationConnector Association="CP25Team02Model.FK_Test_Type" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

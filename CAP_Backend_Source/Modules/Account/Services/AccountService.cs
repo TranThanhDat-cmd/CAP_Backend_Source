@@ -15,6 +15,7 @@ namespace CAP_Backend_Source.Services
         {
             return await dbContext.Accounts
                 .Where(x => x.Email == email && x.Password == password)
+                .Include(x=>x.Role)
                 .FirstOrDefaultAsync();
         }
         public Account Create(CreateAccountRequest request)
@@ -23,9 +24,9 @@ namespace CAP_Backend_Source.Services
             {
                 Address = request.Address,
                 Email = request.Email,
-                Name = request.Name,
+                FullName = request.Name,
                 Password = request.Password,
-                Role = nameof(request.Role),
+                RoleId = request.RoleId,
             };
             dbContext.Accounts.Add(acc);
             dbContext.SaveChanges();

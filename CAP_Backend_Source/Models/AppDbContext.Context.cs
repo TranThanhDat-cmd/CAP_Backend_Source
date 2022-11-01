@@ -26,5 +26,18 @@ namespace CAP_Backend_Source.Models
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<ContentProgram> ContentPrograms { get; set; }
+        public virtual DbSet<EssayAnswer> EssayAnswers { get; set; }
+        public virtual DbSet<EssayQuestion> EssayQuestions { get; set; }
+        public virtual DbSet<Faculty> Faculties { get; set; }
+        public virtual DbSet<Learner> Learners { get; set; }
+        public virtual DbSet<MultipleChoiceAnswer> MultipleChoiceAnswers { get; set; }
+        public virtual DbSet<MultipleChoiceQuestion> MultipleChoiceQuestions { get; set; }
+        public virtual DbSet<Program> Programs { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Test> Tests { get; set; }
+        public virtual DbSet<Type> Types { get; set; }
     }
 }

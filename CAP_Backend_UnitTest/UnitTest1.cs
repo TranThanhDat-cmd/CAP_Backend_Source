@@ -37,7 +37,7 @@ namespace CAP_Backend_UnitTest
             AccountService accountService = new AccountService();
             accountService.Create(new CreateAccountRequest()
             {
-                Role = Role.Admin,
+                RoleId = 1,
                 Address = "Test",
                 Name = "Test",
                 Password = "Test"
@@ -51,7 +51,7 @@ namespace CAP_Backend_UnitTest
             AccountService accountService = new AccountService();
             var acc = accountService.Create(new CreateAccountRequest()
             {
-                Role = Role.Admin,
+                RoleId = 2,
                 Address = "Test",
                 Name = "Test",
                 Email = "Test@gmail.com",

@@ -26,8 +26,8 @@ namespace CAP_Backend_Source.Services
                 return;
             }
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim(ClaimTypes.Role, acc.Role));
-            identity.AddClaim(new Claim(ClaimTypes.Sid, acc.Id.ToString()));
+            identity.AddClaim(new Claim(ClaimTypes.Role, acc.Role.RoleName));
+            identity.AddClaim(new Claim(ClaimTypes.Sid, acc.AccountId.ToString()));
             identity.AddClaim(new Claim("Email", acc.Email));
             context.Validated(identity);
         }
