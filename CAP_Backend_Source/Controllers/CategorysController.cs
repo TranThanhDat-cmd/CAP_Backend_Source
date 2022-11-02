@@ -14,6 +14,13 @@ namespace CAP_Backend_Source.Controllers
     {
         CategoryService categoryService = new CategoryService();
 
+        [Route("getall")]
+        [HttpGet]
+        public IHttpActionResult GetAll()
+        {
+            return Ok(categoryService.GetAllCategory());
+        }
+
         [Route("create")]
         [HttpPost]
         public IHttpActionResult Create(CreateCategoryRequest request)
