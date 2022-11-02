@@ -14,10 +14,12 @@ namespace CAP_Backend_Source.Models
     
     public partial class EssayAnswer
     {
-        public int EQuestionId { get; set; }
+        public int EAnswerId { get; set; }
+        public Nullable<int> EQuestionId { get; set; }
         public int AccountIdRespondent { get; set; }
         public string EAnswerContent { get; set; }
     
         public virtual Account Account { get; set; }
+        public virtual EssayQuestion EssayQuestion { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace CAP_Backend_Source.Models
         }
     
         public int TestId { get; set; }
+        public int ProgramId { get; set; }
         public string TestTitle { get; set; }
         public int TypeId { get; set; }
     
@@ -29,6 +30,7 @@ namespace CAP_Backend_Source.Models
         public virtual ICollection<EssayQuestion> EssayQuestions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MultipleChoiceQuestion> MultipleChoiceQuestions { get; set; }
+        public virtual Program Program { get; set; }
         public virtual Type Type { get; set; }
     }
 }

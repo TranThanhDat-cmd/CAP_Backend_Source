@@ -21,6 +21,5 @@ namespace CAP_Backend_Source.Models
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }
-        public virtual Program Program { get; set; }
     }
 }

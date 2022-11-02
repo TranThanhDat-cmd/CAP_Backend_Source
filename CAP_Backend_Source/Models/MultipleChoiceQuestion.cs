@@ -14,15 +14,23 @@ namespace CAP_Backend_Source.Models
     
     public partial class MultipleChoiceQuestion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MultipleChoiceQuestion()
+        {
+            this.MultipleChoiceAnswers = new HashSet<MultipleChoiceAnswer>();
+        }
+    
         public int MCQuestionId { get; set; }
         public int TestsId { get; set; }
         public string MCQuestionTitle { get; set; }
         public string Content1 { get; set; }
-        public byte[] Content2 { get; set; }
+        public string Content2 { get; set; }
         public string Content3 { get; set; }
         public string Content4 { get; set; }
         public string Answer { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MultipleChoiceAnswer> MultipleChoiceAnswers { get; set; }
         public virtual Test Test { get; set; }
     }
 }

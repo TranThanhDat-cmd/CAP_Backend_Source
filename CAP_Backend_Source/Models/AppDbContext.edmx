@@ -24,14 +24,14 @@
           <Key>
             <PropertyRef Name="CategoryId" />
           </Key>
-          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ContentProgram">
           <Key>
             <PropertyRef Name="ContentId" />
           </Key>
-          <Property Name="ContentId" Type="int" Nullable="false" />
+          <Property Name="ContentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProgramId" Type="int" Nullable="false" />
           <Property Name="Chapter" Type="int" Nullable="false" />
           <Property Name="ContentType" Type="nvarchar(max)" Nullable="false" />
@@ -39,9 +39,10 @@
         </EntityType>
         <EntityType Name="EssayAnswers">
           <Key>
-            <PropertyRef Name="EQuestionId" />
+            <PropertyRef Name="EAnswerId" />
           </Key>
-          <Property Name="EQuestionId" Type="int" Nullable="false" />
+          <Property Name="EAnswerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EQuestionId" Type="int" />
           <Property Name="AccountIdRespondent" Type="int" Nullable="false" />
           <Property Name="EAnswerContent" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -49,7 +50,7 @@
           <Key>
             <PropertyRef Name="EQuestionId" />
           </Key>
-          <Property Name="EQuestionId" Type="int" Nullable="false" />
+          <Property Name="EQuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TestsId" Type="int" Nullable="false" />
           <Property Name="EQuestionTitle" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -57,23 +58,24 @@
           <Key>
             <PropertyRef Name="FacultyId" />
           </Key>
-          <Property Name="FacultyId" Type="int" Nullable="false" />
+          <Property Name="FacultyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FacultyName" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Learner">
           <Key>
             <PropertyRef Name="LearnerId" />
           </Key>
-          <Property Name="LearnerId" Type="int" Nullable="false" />
+          <Property Name="LearnerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountIdLearner" Type="int" Nullable="false" />
           <Property Name="ProgramId" Type="int" Nullable="false" />
           <Property Name="AccountIdApprover" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MultipleChoiceAnswers">
           <Key>
-            <PropertyRef Name="MCQuestionId" />
+            <PropertyRef Name="MCAnswerId" />
           </Key>
-          <Property Name="MCQuestionId" Type="int" Nullable="false" />
+          <Property Name="MCAnswerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MCQuestionId" Type="int" />
           <Property Name="AccountIdRespondent" Type="int" Nullable="false" />
           <Property Name="MCAnswerContent" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -81,11 +83,11 @@
           <Key>
             <PropertyRef Name="MCQuestionId" />
           </Key>
-          <Property Name="MCQuestionId" Type="int" Nullable="false" />
+          <Property Name="MCQuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TestsId" Type="int" Nullable="false" />
           <Property Name="MCQuestionTitle" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Content1" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Content2" Type="varbinary(max)" />
+          <Property Name="Content2" Type="nvarchar(max)" />
           <Property Name="Content3" Type="nvarchar(max)" />
           <Property Name="Content4" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
@@ -94,7 +96,7 @@
           <Key>
             <PropertyRef Name="ProgramId" />
           </Key>
-          <Property Name="ProgramId" Type="int" Nullable="false" />
+          <Property Name="ProgramId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountIdCreator" Type="int" Nullable="false" />
           <Property Name="FacultyId" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
@@ -109,7 +111,7 @@
           <Key>
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -126,7 +128,8 @@
           <Key>
             <PropertyRef Name="TestId" />
           </Key>
-          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="TestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramId" Type="int" Nullable="false" />
           <Property Name="TestTitle" Type="nvarchar(max)" Nullable="false" />
           <Property Name="TypeId" Type="int" Nullable="false" />
         </EntityType>
@@ -134,21 +137,9 @@
           <Key>
             <PropertyRef Name="TypeId" />
           </Key>
-          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeName" Type="nvarchar(max)" />
         </EntityType>
-        <Association Name="FK_Account_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="Account" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="Account">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ContentProgram_Program">
           <End Role="Program" Type="Self.Program" Multiplicity="1" />
           <End Role="ContentProgram" Type="Self.ContentProgram" Multiplicity="*" />
@@ -173,6 +164,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EssayAnswers_EssayQuestions">
+          <End Role="EssayQuestions" Type="Self.EssayQuestions" Multiplicity="0..1" />
+          <End Role="EssayAnswers" Type="Self.EssayAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EssayQuestions">
+              <PropertyRef Name="EQuestionId" />
+            </Principal>
+            <Dependent Role="EssayAnswers">
+              <PropertyRef Name="EQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EssayQuestions_Test">
           <End Role="Test" Type="Self.Test" Multiplicity="1" />
           <End Role="EssayQuestions" Type="Self.EssayQuestions" Multiplicity="*" />
@@ -185,19 +188,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Learner_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Learner" Type="Self.Learner" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="AccountId" />
-            </Principal>
-            <Dependent Role="Learner">
-              <PropertyRef Name="AccountIdLearner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Learner_Account1">
+        <Association Name="FK_Learner_Account_Approver">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Learner" Type="Self.Learner" Multiplicity="*" />
           <ReferentialConstraint>
@@ -209,15 +200,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Learner_Program">
-          <End Role="Program" Type="Self.Program" Multiplicity="1" />
+        <Association Name="FK_Learner_Account_Learner">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Learner" Type="Self.Learner" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Program">
-              <PropertyRef Name="ProgramId" />
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
             </Principal>
             <Dependent Role="Learner">
-              <PropertyRef Name="ProgramId" />
+              <PropertyRef Name="AccountIdLearner" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -230,6 +221,18 @@
             </Principal>
             <Dependent Role="MultipleChoiceAnswers">
               <PropertyRef Name="AccountIdRespondent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MultipleChoiceAnswers_MultipleChoiceQuestions">
+          <End Role="MultipleChoiceQuestions" Type="Self.MultipleChoiceQuestions" Multiplicity="0..1" />
+          <End Role="MultipleChoiceAnswers" Type="Self.MultipleChoiceAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MultipleChoiceQuestions">
+              <PropertyRef Name="MCQuestionId" />
+            </Principal>
+            <Dependent Role="MultipleChoiceAnswers">
+              <PropertyRef Name="MCQuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -281,6 +284,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ROLE">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Program">
+          <End Role="Program" Type="Self.Program" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Test_Type">
           <End Role="Type" Type="Self.Type" Multiplicity="1" />
           <End Role="Test" Type="Self.Test" Multiplicity="*" />
@@ -308,10 +337,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Account_Role" Association="Self.FK_Account_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Account" EntitySet="Account" />
-          </AssociationSet>
           <AssociationSet Name="FK_ContentProgram_Program" Association="Self.FK_ContentProgram_Program">
             <End Role="Program" EntitySet="Program" />
             <End Role="ContentProgram" EntitySet="ContentProgram" />
@@ -320,24 +345,28 @@
             <End Role="Account" EntitySet="Account" />
             <End Role="EssayAnswers" EntitySet="EssayAnswers" />
           </AssociationSet>
+          <AssociationSet Name="FK_EssayAnswers_EssayQuestions" Association="Self.FK_EssayAnswers_EssayQuestions">
+            <End Role="EssayQuestions" EntitySet="EssayQuestions" />
+            <End Role="EssayAnswers" EntitySet="EssayAnswers" />
+          </AssociationSet>
           <AssociationSet Name="FK_EssayQuestions_Test" Association="Self.FK_EssayQuestions_Test">
             <End Role="Test" EntitySet="Test" />
             <End Role="EssayQuestions" EntitySet="EssayQuestions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Learner_Account" Association="Self.FK_Learner_Account">
+          <AssociationSet Name="FK_Learner_Account_Approver" Association="Self.FK_Learner_Account_Approver">
             <End Role="Account" EntitySet="Account" />
             <End Role="Learner" EntitySet="Learner" />
           </AssociationSet>
-          <AssociationSet Name="FK_Learner_Account1" Association="Self.FK_Learner_Account1">
+          <AssociationSet Name="FK_Learner_Account_Learner" Association="Self.FK_Learner_Account_Learner">
             <End Role="Account" EntitySet="Account" />
-            <End Role="Learner" EntitySet="Learner" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Learner_Program" Association="Self.FK_Learner_Program">
-            <End Role="Program" EntitySet="Program" />
             <End Role="Learner" EntitySet="Learner" />
           </AssociationSet>
           <AssociationSet Name="FK_MultipleChoiceAnswers_Account" Association="Self.FK_MultipleChoiceAnswers_Account">
             <End Role="Account" EntitySet="Account" />
+            <End Role="MultipleChoiceAnswers" EntitySet="MultipleChoiceAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MultipleChoiceAnswers_MultipleChoiceQuestions" Association="Self.FK_MultipleChoiceAnswers_MultipleChoiceQuestions">
+            <End Role="MultipleChoiceQuestions" EntitySet="MultipleChoiceQuestions" />
             <End Role="MultipleChoiceAnswers" EntitySet="MultipleChoiceAnswers" />
           </AssociationSet>
           <AssociationSet Name="FK_MultipleChoiceQuestions_Test" Association="Self.FK_MultipleChoiceQuestions_Test">
@@ -355,6 +384,14 @@
           <AssociationSet Name="FK_Program_Faculty" Association="Self.FK_Program_Faculty">
             <End Role="Faculty" EntitySet="Faculty" />
             <End Role="Program" EntitySet="Program" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLE" Association="Self.FK_ROLE">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Program" Association="Self.FK_Test_Program">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="Test" EntitySet="Test" />
           </AssociationSet>
           <AssociationSet Name="FK_Test_Type" Association="Self.FK_Test_Type">
             <End Role="Type" EntitySet="Type" />
@@ -380,19 +417,15 @@
           <EntitySet Name="sysdiagrams" EntityType="CP25Team02Model.sysdiagram" />
           <EntitySet Name="Tests" EntityType="CP25Team02Model.Test" />
           <EntitySet Name="Types" EntityType="CP25Team02Model.Type" />
-          <AssociationSet Name="FK_Account_Role" Association="CP25Team02Model.FK_Account_Role">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="Account" EntitySet="Accounts" />
-          </AssociationSet>
           <AssociationSet Name="FK_EssayAnswers_Account" Association="CP25Team02Model.FK_EssayAnswers_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="EssayAnswer" EntitySet="EssayAnswers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Learner_Account" Association="CP25Team02Model.FK_Learner_Account">
+          <AssociationSet Name="FK_Learner_Account_Approver" Association="CP25Team02Model.FK_Learner_Account_Approver">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Learner" EntitySet="Learners" />
           </AssociationSet>
-          <AssociationSet Name="FK_Learner_Account1" Association="CP25Team02Model.FK_Learner_Account1">
+          <AssociationSet Name="FK_Learner_Account_Learner" Association="CP25Team02Model.FK_Learner_Account_Learner">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Learner" EntitySet="Learners" />
           </AssociationSet>
@@ -404,6 +437,10 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Program" EntitySet="Programs" />
           </AssociationSet>
+          <AssociationSet Name="FK_ROLE" Association="CP25Team02Model.FK_ROLE">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Program_Category" Association="CP25Team02Model.FK_Program_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Program" EntitySet="Programs" />
@@ -411,6 +448,10 @@
           <AssociationSet Name="FK_ContentProgram_Program" Association="CP25Team02Model.FK_ContentProgram_Program">
             <End Role="Program" EntitySet="Programs" />
             <End Role="ContentProgram" EntitySet="ContentPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EssayAnswers_EssayQuestions" Association="CP25Team02Model.FK_EssayAnswers_EssayQuestions">
+            <End Role="EssayQuestion" EntitySet="EssayQuestions" />
+            <End Role="EssayAnswer" EntitySet="EssayAnswers" />
           </AssociationSet>
           <AssociationSet Name="FK_EssayQuestions_Test" Association="CP25Team02Model.FK_EssayQuestions_Test">
             <End Role="Test" EntitySet="Tests" />
@@ -420,13 +461,17 @@
             <End Role="Faculty" EntitySet="Faculties" />
             <End Role="Program" EntitySet="Programs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Learner_Program" Association="CP25Team02Model.FK_Learner_Program">
-            <End Role="Program" EntitySet="Programs" />
-            <End Role="Learner" EntitySet="Learners" />
+          <AssociationSet Name="FK_MultipleChoiceAnswers_MultipleChoiceQuestions" Association="CP25Team02Model.FK_MultipleChoiceAnswers_MultipleChoiceQuestions">
+            <End Role="MultipleChoiceQuestion" EntitySet="MultipleChoiceQuestions" />
+            <End Role="MultipleChoiceAnswer" EntitySet="MultipleChoiceAnswers" />
           </AssociationSet>
           <AssociationSet Name="FK_MultipleChoiceQuestions_Test" Association="CP25Team02Model.FK_MultipleChoiceQuestions_Test">
             <End Role="Test" EntitySet="Tests" />
             <End Role="MultipleChoiceQuestion" EntitySet="MultipleChoiceQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Program" Association="CP25Team02Model.FK_Test_Program">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="Test" EntitySet="Tests" />
           </AssociationSet>
           <AssociationSet Name="FK_Test_Type" Association="CP25Team02Model.FK_Test_Type">
             <End Role="Type" EntitySet="Types" />
@@ -447,18 +492,18 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Role" Relationship="CP25Team02Model.FK_Account_Role" FromRole="Account" ToRole="Role" />
           <NavigationProperty Name="EssayAnswers" Relationship="CP25Team02Model.FK_EssayAnswers_Account" FromRole="Account" ToRole="EssayAnswer" />
-          <NavigationProperty Name="Learners" Relationship="CP25Team02Model.FK_Learner_Account" FromRole="Account" ToRole="Learner" />
-          <NavigationProperty Name="Learners1" Relationship="CP25Team02Model.FK_Learner_Account1" FromRole="Account" ToRole="Learner" />
+          <NavigationProperty Name="Learners" Relationship="CP25Team02Model.FK_Learner_Account_Approver" FromRole="Account" ToRole="Learner" />
+          <NavigationProperty Name="Learners1" Relationship="CP25Team02Model.FK_Learner_Account_Learner" FromRole="Account" ToRole="Learner" />
           <NavigationProperty Name="MultipleChoiceAnswers" Relationship="CP25Team02Model.FK_MultipleChoiceAnswers_Account" FromRole="Account" ToRole="MultipleChoiceAnswer" />
           <NavigationProperty Name="Programs" Relationship="CP25Team02Model.FK_Program_Account" FromRole="Account" ToRole="Program" />
+          <NavigationProperty Name="Role" Relationship="CP25Team02Model.FK_ROLE" FromRole="Account" ToRole="Role" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
           </Key>
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Programs" Relationship="CP25Team02Model.FK_Program_Category" FromRole="Category" ToRole="Program" />
         </EntityType>
@@ -466,7 +511,7 @@
           <Key>
             <PropertyRef Name="ContentId" />
           </Key>
-          <Property Name="ContentId" Type="Int32" Nullable="false" />
+          <Property Name="ContentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProgramId" Type="Int32" Nullable="false" />
           <Property Name="Chapter" Type="Int32" Nullable="false" />
           <Property Name="ContentType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -475,27 +520,30 @@
         </EntityType>
         <EntityType Name="EssayAnswer">
           <Key>
-            <PropertyRef Name="EQuestionId" />
+            <PropertyRef Name="EAnswerId" />
           </Key>
-          <Property Name="EQuestionId" Type="Int32" Nullable="false" />
+          <Property Name="EAnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EQuestionId" Type="Int32" />
           <Property Name="AccountIdRespondent" Type="Int32" Nullable="false" />
           <Property Name="EAnswerContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="CP25Team02Model.FK_EssayAnswers_Account" FromRole="EssayAnswer" ToRole="Account" />
+          <NavigationProperty Name="EssayQuestion" Relationship="CP25Team02Model.FK_EssayAnswers_EssayQuestions" FromRole="EssayAnswer" ToRole="EssayQuestion" />
         </EntityType>
         <EntityType Name="EssayQuestion">
           <Key>
             <PropertyRef Name="EQuestionId" />
           </Key>
-          <Property Name="EQuestionId" Type="Int32" Nullable="false" />
+          <Property Name="EQuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TestsId" Type="Int32" Nullable="false" />
           <Property Name="EQuestionTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EssayAnswers" Relationship="CP25Team02Model.FK_EssayAnswers_EssayQuestions" FromRole="EssayQuestion" ToRole="EssayAnswer" />
           <NavigationProperty Name="Test" Relationship="CP25Team02Model.FK_EssayQuestions_Test" FromRole="EssayQuestion" ToRole="Test" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
             <PropertyRef Name="FacultyId" />
           </Key>
-          <Property Name="FacultyId" Type="Int32" Nullable="false" />
+          <Property Name="FacultyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FacultyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Programs" Relationship="CP25Team02Model.FK_Program_Faculty" FromRole="Faculty" ToRole="Program" />
         </EntityType>
@@ -503,42 +551,44 @@
           <Key>
             <PropertyRef Name="LearnerId" />
           </Key>
-          <Property Name="LearnerId" Type="Int32" Nullable="false" />
+          <Property Name="LearnerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountIdLearner" Type="Int32" Nullable="false" />
           <Property Name="ProgramId" Type="Int32" Nullable="false" />
           <Property Name="AccountIdApprover" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="CP25Team02Model.FK_Learner_Account" FromRole="Learner" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="CP25Team02Model.FK_Learner_Account1" FromRole="Learner" ToRole="Account" />
-          <NavigationProperty Name="Program" Relationship="CP25Team02Model.FK_Learner_Program" FromRole="Learner" ToRole="Program" />
+          <NavigationProperty Name="Account" Relationship="CP25Team02Model.FK_Learner_Account_Approver" FromRole="Learner" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="CP25Team02Model.FK_Learner_Account_Learner" FromRole="Learner" ToRole="Account" />
         </EntityType>
         <EntityType Name="MultipleChoiceAnswer">
           <Key>
-            <PropertyRef Name="MCQuestionId" />
+            <PropertyRef Name="MCAnswerId" />
           </Key>
-          <Property Name="MCQuestionId" Type="Int32" Nullable="false" />
+          <Property Name="MCAnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MCQuestionId" Type="Int32" />
           <Property Name="AccountIdRespondent" Type="Int32" Nullable="false" />
           <Property Name="MCAnswerContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="CP25Team02Model.FK_MultipleChoiceAnswers_Account" FromRole="MultipleChoiceAnswer" ToRole="Account" />
+          <NavigationProperty Name="MultipleChoiceQuestion" Relationship="CP25Team02Model.FK_MultipleChoiceAnswers_MultipleChoiceQuestions" FromRole="MultipleChoiceAnswer" ToRole="MultipleChoiceQuestion" />
         </EntityType>
         <EntityType Name="MultipleChoiceQuestion">
           <Key>
             <PropertyRef Name="MCQuestionId" />
           </Key>
-          <Property Name="MCQuestionId" Type="Int32" Nullable="false" />
+          <Property Name="MCQuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TestsId" Type="Int32" Nullable="false" />
           <Property Name="MCQuestionTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Content1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Content2" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Content2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Content3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Content4" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Answer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MultipleChoiceAnswers" Relationship="CP25Team02Model.FK_MultipleChoiceAnswers_MultipleChoiceQuestions" FromRole="MultipleChoiceQuestion" ToRole="MultipleChoiceAnswer" />
           <NavigationProperty Name="Test" Relationship="CP25Team02Model.FK_MultipleChoiceQuestions_Test" FromRole="MultipleChoiceQuestion" ToRole="Test" />
         </EntityType>
         <EntityType Name="Program">
           <Key>
             <PropertyRef Name="ProgramId" />
           </Key>
-          <Property Name="ProgramId" Type="Int32" Nullable="false" />
+          <Property Name="ProgramId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountIdCreator" Type="Int32" Nullable="false" />
           <Property Name="FacultyId" Type="Int32" Nullable="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
@@ -552,15 +602,15 @@
           <NavigationProperty Name="Category" Relationship="CP25Team02Model.FK_Program_Category" FromRole="Program" ToRole="Category" />
           <NavigationProperty Name="ContentPrograms" Relationship="CP25Team02Model.FK_ContentProgram_Program" FromRole="Program" ToRole="ContentProgram" />
           <NavigationProperty Name="Faculty" Relationship="CP25Team02Model.FK_Program_Faculty" FromRole="Program" ToRole="Faculty" />
-          <NavigationProperty Name="Learners" Relationship="CP25Team02Model.FK_Learner_Program" FromRole="Program" ToRole="Learner" />
+          <NavigationProperty Name="Tests" Relationship="CP25Team02Model.FK_Test_Program" FromRole="Program" ToRole="Test" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Accounts" Relationship="CP25Team02Model.FK_Account_Role" FromRole="Role" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="CP25Team02Model.FK_ROLE" FromRole="Role" ToRole="Account" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -576,33 +626,23 @@
           <Key>
             <PropertyRef Name="TestId" />
           </Key>
-          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <Property Name="TestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramId" Type="Int32" Nullable="false" />
           <Property Name="TestTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EssayQuestions" Relationship="CP25Team02Model.FK_EssayQuestions_Test" FromRole="Test" ToRole="EssayQuestion" />
           <NavigationProperty Name="MultipleChoiceQuestions" Relationship="CP25Team02Model.FK_MultipleChoiceQuestions_Test" FromRole="Test" ToRole="MultipleChoiceQuestion" />
+          <NavigationProperty Name="Program" Relationship="CP25Team02Model.FK_Test_Program" FromRole="Test" ToRole="Program" />
           <NavigationProperty Name="Type" Relationship="CP25Team02Model.FK_Test_Type" FromRole="Test" ToRole="Type" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
             <PropertyRef Name="TypeId" />
           </Key>
-          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Tests" Relationship="CP25Team02Model.FK_Test_Type" FromRole="Type" ToRole="Test" />
         </EntityType>
-        <Association Name="FK_Account_Role">
-          <End Type="CP25Team02Model.Role" Role="Role" Multiplicity="1" />
-          <End Type="CP25Team02Model.Account" Role="Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="Account">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EssayAnswers_Account">
           <End Type="CP25Team02Model.Account" Role="Account" Multiplicity="1" />
           <End Type="CP25Team02Model.EssayAnswer" Role="EssayAnswer" Multiplicity="*" />
@@ -615,19 +655,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Learner_Account">
-          <End Type="CP25Team02Model.Account" Role="Account" Multiplicity="1" />
-          <End Type="CP25Team02Model.Learner" Role="Learner" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="AccountId" />
-            </Principal>
-            <Dependent Role="Learner">
-              <PropertyRef Name="AccountIdLearner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Learner_Account1">
+        <Association Name="FK_Learner_Account_Approver">
           <End Type="CP25Team02Model.Account" Role="Account" Multiplicity="1" />
           <End Type="CP25Team02Model.Learner" Role="Learner" Multiplicity="*" />
           <ReferentialConstraint>
@@ -636,6 +664,18 @@
             </Principal>
             <Dependent Role="Learner">
               <PropertyRef Name="AccountIdApprover" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Learner_Account_Learner">
+          <End Type="CP25Team02Model.Account" Role="Account" Multiplicity="1" />
+          <End Type="CP25Team02Model.Learner" Role="Learner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Learner">
+              <PropertyRef Name="AccountIdLearner" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -663,6 +703,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ROLE">
+          <End Type="CP25Team02Model.Role" Role="Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CP25Team02Model.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Program_Category">
           <End Type="CP25Team02Model.Category" Role="Category" Multiplicity="1" />
           <End Type="CP25Team02Model.Program" Role="Program" Multiplicity="*" />
@@ -684,6 +738,18 @@
             </Principal>
             <Dependent Role="ContentProgram">
               <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EssayAnswers_EssayQuestions">
+          <End Type="CP25Team02Model.EssayQuestion" Role="EssayQuestion" Multiplicity="0..1" />
+          <End Type="CP25Team02Model.EssayAnswer" Role="EssayAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EssayQuestion">
+              <PropertyRef Name="EQuestionId" />
+            </Principal>
+            <Dependent Role="EssayAnswer">
+              <PropertyRef Name="EQuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -711,15 +777,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Learner_Program">
-          <End Type="CP25Team02Model.Program" Role="Program" Multiplicity="1" />
-          <End Type="CP25Team02Model.Learner" Role="Learner" Multiplicity="*" />
+        <Association Name="FK_MultipleChoiceAnswers_MultipleChoiceQuestions">
+          <End Type="CP25Team02Model.MultipleChoiceQuestion" Role="MultipleChoiceQuestion" Multiplicity="0..1" />
+          <End Type="CP25Team02Model.MultipleChoiceAnswer" Role="MultipleChoiceAnswer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Program">
-              <PropertyRef Name="ProgramId" />
+            <Principal Role="MultipleChoiceQuestion">
+              <PropertyRef Name="MCQuestionId" />
             </Principal>
-            <Dependent Role="Learner">
-              <PropertyRef Name="ProgramId" />
+            <Dependent Role="MultipleChoiceAnswer">
+              <PropertyRef Name="MCQuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -735,6 +801,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Test_Program">
+          <End Type="CP25Team02Model.Program" Role="Program" Multiplicity="1" />
+          <End Type="CP25Team02Model.Test" Role="Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Test_Type">
           <End Type="CP25Team02Model.Type" Role="Type" Multiplicity="1" />
           <End Type="CP25Team02Model.Test" Role="Test" Multiplicity="*" />
@@ -747,7 +825,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -794,6 +872,7 @@
                 <ScalarProperty Name="EAnswerContent" ColumnName="EAnswerContent" />
                 <ScalarProperty Name="AccountIdRespondent" ColumnName="AccountIdRespondent" />
                 <ScalarProperty Name="EQuestionId" ColumnName="EQuestionId" />
+                <ScalarProperty Name="EAnswerId" ColumnName="EAnswerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -830,6 +909,7 @@
                 <ScalarProperty Name="MCAnswerContent" ColumnName="MCAnswerContent" />
                 <ScalarProperty Name="AccountIdRespondent" ColumnName="AccountIdRespondent" />
                 <ScalarProperty Name="MCQuestionId" ColumnName="MCQuestionId" />
+                <ScalarProperty Name="MCAnswerId" ColumnName="MCAnswerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -887,6 +967,7 @@
               <MappingFragment StoreEntitySet="Test">
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />
                 <ScalarProperty Name="TestTitle" ColumnName="TestTitle" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
                 <ScalarProperty Name="TestId" ColumnName="TestId" />
               </MappingFragment>
             </EntityTypeMapping>

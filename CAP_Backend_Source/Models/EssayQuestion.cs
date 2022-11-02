@@ -14,10 +14,18 @@ namespace CAP_Backend_Source.Models
     
     public partial class EssayQuestion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EssayQuestion()
+        {
+            this.EssayAnswers = new HashSet<EssayAnswer>();
+        }
+    
         public int EQuestionId { get; set; }
         public int TestsId { get; set; }
         public string EQuestionTitle { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EssayAnswer> EssayAnswers { get; set; }
         public virtual Test Test { get; set; }
     }
 }

@@ -14,10 +14,12 @@ namespace CAP_Backend_Source.Models
     
     public partial class MultipleChoiceAnswer
     {
-        public int MCQuestionId { get; set; }
+        public int MCAnswerId { get; set; }
+        public Nullable<int> MCQuestionId { get; set; }
         public int AccountIdRespondent { get; set; }
         public string MCAnswerContent { get; set; }
     
         public virtual Account Account { get; set; }
+        public virtual MultipleChoiceQuestion MultipleChoiceQuestion { get; set; }
     }
 }
