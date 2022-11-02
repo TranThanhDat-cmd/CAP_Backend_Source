@@ -9,6 +9,12 @@ namespace CAP_Backend_Source.Services
 {
     public class CategoryService : BaseService
     {
+        public List<Category> GetAllCategory()
+        {
+            List<Category> listCategoris = dbContext.Categories.ToList();
+            return listCategoris;
+        }
+
         public Category CreateCategory(CreateCategoryRequest request)
         {
             var category = new Category()
