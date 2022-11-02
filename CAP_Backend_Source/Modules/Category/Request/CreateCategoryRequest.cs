@@ -9,4 +9,8 @@ namespace CAP_Backend_Source.Modules.Category.Request
     {
         public string Name { get; set; }
     }
+    public class EditCategoryRequest
+    {
+        public string Name { get; set; }
+    }
 }

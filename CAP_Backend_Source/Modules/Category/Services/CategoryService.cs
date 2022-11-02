@@ -19,5 +19,21 @@ namespace CAP_Backend_Source.Services
             dbContext.SaveChanges();
             return category;
         }
+
+        public Category EditCategory(int id, EditCategoryRequest request)
+        {
+            var _category = dbContext.Categories.SingleOrDefault(c => c.CategoryId == id);
+            _category.CategoryName = request.Name;
+            dbContext.SaveChanges();
+            return _category;
+        }
+
+        public String DeleteCategory(int id)
+        {
+            var _category = dbContext.Categories.SingleOrDefault(c => c.CategoryId == id);
+            dbContext.Categories.Remove(_category);
+            dbContext.SaveChanges();
+            return "Successful Delete";
+        }
     }
 }
