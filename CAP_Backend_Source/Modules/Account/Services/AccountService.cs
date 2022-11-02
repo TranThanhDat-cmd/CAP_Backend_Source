@@ -18,7 +18,7 @@ namespace CAP_Backend_Source.Services
                 .Include(x=>x.Role)
                 .FirstOrDefaultAsync();
         }
-        public Account Create(CreateAccountRequest request)
+        public  Account Create(CreateAccountRequest request)
         {
             var acc = new Account()
             {
@@ -31,6 +31,21 @@ namespace CAP_Backend_Source.Services
             dbContext.Accounts.Add(acc);
             dbContext.SaveChanges();
             return acc;
+        }
+
+        public async Task<List<Account>> SearchAsync(string keyword)
+        {
+            return await dbContext.Accounts
+                .Where(x=>(x.Email+x.FullName).Contains(keyword))
+                .ToListAsync();
+        }
+
+        public async Task<Account> GetDetailAsync(int id)
+        {
+            return await dbContext.Accounts
+                .Where(x => x.AccountId == id)
+                .Include(x=>x.Role)
+                .FirstOrDefaultAsync();
         }
     }
 }

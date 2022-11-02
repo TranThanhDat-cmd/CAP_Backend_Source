@@ -59,5 +59,37 @@ namespace CAP_Backend_UnitTest
             });
             Assert.IsInstanceOfType(acc,typeof(Account));
         }
+
+        [TestMethod]
+        public async Task Search_Success()
+        {
+            AccountService accountService = new AccountService();
+            var result = await accountService.SearchAsync("dat");
+            Assert.AreNotEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public async Task Search_Fail()
+        {
+            AccountService accountService = new AccountService();
+            var result = await accountService.SearchAsync("..............");
+            Assert.Equals(0, result.Count);
+        }
+
+        [TestMethod]
+        public async Task GetDeatil_Fail()
+        {
+            AccountService accountService = new AccountService();
+            var result = await accountService.GetDetailAsync(-9);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public async Task GetDeatil_Success()
+        {
+            AccountService accountService = new AccountService();
+            var result = await accountService.GetDetailAsync(1);
+            Assert.IsNotNull(result);
+        }
     }
 }
