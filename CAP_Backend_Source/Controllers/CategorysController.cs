@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace CAP_Backend_Source.Controllers
 {
-    [RoutePrefix("api/categorys")]
+    [RoutePrefix("api/categoris")]
     public class CategorysController : ApiController
     {
         CategoryService categoryService = new CategoryService();
