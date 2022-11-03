@@ -25,21 +25,36 @@ namespace CAP_Backend_Source.Controllers
         [HttpPost]
         public IHttpActionResult Create(CreateCategoryRequest request)
         {
-            return Ok(categoryService.CreateCategory(request));
+            var response = categoryService.CreateCategory(request);
+            if(response == null)
+            {
+                return BadRequest();
+            }
+            return Ok(response);
         }
 
         [Route("edit/{id}")]
         [HttpPut]
         public IHttpActionResult Edit(int id, EditCategoryRequest request)
         {
-            return Ok(categoryService.EditCategory(id, request));
+            var response = categoryService.EditCategory(id, request);
+            if (response == null)
+            {
+                return BadRequest();
+            }
+            return Ok(response);
         }
 
         [Route("delete/{id}")]
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            return Ok(categoryService.DeleteCategory(id));
+            var response = categoryService.DeleteCategory(id);
+            if (response == null)
+            {
+                return BadRequest();
+            }
+            return Ok(response);
         }
     }
 }
