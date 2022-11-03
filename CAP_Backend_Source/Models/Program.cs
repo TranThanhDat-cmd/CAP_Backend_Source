@@ -18,7 +18,7 @@ namespace CAP_Backend_Source.Models
         public Program()
         {
             this.ContentPrograms = new HashSet<ContentProgram>();
-            this.Learners = new HashSet<Learner>();
+            this.Tests = new HashSet<Test>();
         }
     
         public int ProgramId { get; set; }
@@ -38,6 +38,6 @@ namespace CAP_Backend_Source.Models
         public virtual ICollection<ContentProgram> ContentPrograms { get; set; }
         public virtual Faculty Faculty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Learner> Learners { get; set; }
+        public virtual ICollection<Test> Tests { get; set; }
     }
 }

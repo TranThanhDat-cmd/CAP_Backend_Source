@@ -35,7 +35,6 @@ namespace CAP_Backend_Source.Models
         public string Username { get; set; }
         public string PhoneNumber { get; set; }
     
-        public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EssayAnswer> EssayAnswers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -46,5 +45,6 @@ namespace CAP_Backend_Source.Models
         public virtual ICollection<MultipleChoiceAnswer> MultipleChoiceAnswers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Program> Programs { get; set; }
+        public virtual Role Role { get; set; }
     }
 }
