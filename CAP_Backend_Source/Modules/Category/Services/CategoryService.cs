@@ -17,6 +17,10 @@ namespace CAP_Backend_Source.Services
 
         public Category CreateCategory(CreateCategoryRequest request)
         {
+            if(request.Name == null || request.Name == "")
+            {
+                return null;
+            }
             var category = new Category()
             {
                 CategoryName = request.Name
@@ -28,7 +32,15 @@ namespace CAP_Backend_Source.Services
 
         public Category EditCategory(int id, EditCategoryRequest request)
         {
+            if (request.Name == null || request.Name == "")
+            {
+                return null;
+            }
             var _category = dbContext.Categories.SingleOrDefault(c => c.CategoryId == id);
+            if(_category == null)
+            {
+                return null;
+            }
             _category.CategoryName = request.Name;
             dbContext.SaveChanges();
             return _category;
@@ -37,6 +49,10 @@ namespace CAP_Backend_Source.Services
         public String DeleteCategory(int id)
         {
             var _category = dbContext.Categories.SingleOrDefault(c => c.CategoryId == id);
+            if (_category == null)
+            {
+                return null;
+            }
             dbContext.Categories.Remove(_category);
             dbContext.SaveChanges();
             return "Successful Delete";
