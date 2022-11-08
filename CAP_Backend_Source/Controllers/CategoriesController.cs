@@ -11,9 +11,8 @@ using System.Web.Http.Cors;
 
 namespace CAP_Backend_Source.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/categories")]
-    public class CategorysController : ApiController
+    public class CategoriesController : ApiController
     {
         CategoryService categoryService = new CategoryService();
         [Route("getall")]

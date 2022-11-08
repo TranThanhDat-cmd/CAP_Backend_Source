@@ -188,8 +188,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\CategorysController.cs" />
     <Compile Include="Controllers\Common\BaseController.cs" />
+=======
+    <Compile Include="Controllers\CategoriesController.cs" />
+>>>>>>> 1a94e993ed8893ca1ced5334305f22518acfe600
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
