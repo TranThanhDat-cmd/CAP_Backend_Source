@@ -1,4 +1,5 @@
-﻿using CAP_Backend_Source.Modules.Category.Request;
+﻿using CAP_Backend_Source.Controllers.Common;
+using CAP_Backend_Source.Modules.Category.Request;
 using CAP_Backend_Source.Services;
 using System;
 using System.Collections.Generic;
@@ -6,14 +7,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace CAP_Backend_Source.Controllers
 {
-    [RoutePrefix("api/categoris")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/categories")]
     public class CategorysController : ApiController
     {
         CategoryService categoryService = new CategoryService();
-
         [Route("getall")]
         [HttpGet]
         public IHttpActionResult GetAll()

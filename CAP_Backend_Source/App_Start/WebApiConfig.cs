@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace CAP_Backend_Source
 {
@@ -10,7 +11,8 @@ namespace CAP_Backend_Source
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            //config.EnableCors(new EnableCorsAttribute(Properties.Settings.Default.Cors, "", ""));
+            //config.EnableCors();
             // Web API routes
             config.MapHttpAttributeRoutes();
 

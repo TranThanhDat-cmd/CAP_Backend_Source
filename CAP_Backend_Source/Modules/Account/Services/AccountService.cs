@@ -1,4 +1,5 @@
 ﻿using CAP_Backend_Source.Models;
+using CAP_Backend_Source.Modules.Account.Request;
 using CAP_Backend_Source.Services.User.Request;
 using System;
 using System.Collections.Generic;
@@ -13,39 +14,59 @@ namespace CAP_Backend_Source.Services
     {
         public async Task<Account> GetAsync(string email, string password)
         {
-            return await dbContext.Accounts
+            return  dbContext.Accounts
                 .Where(x => x.Email == email && x.Password == password)
                 .Include(x=>x.Role)
-                .FirstOrDefaultAsync();
+                .FirstOrDefault();
         }
         public  Account Create(CreateAccountRequest request)
         {
             var acc = new Account()
             {
-                Address = request.Address,
+
                 Email = request.Email,
-                FullName = request.Name,
-                Password = request.Password,
-                RoleId = request.RoleId,
             };
             dbContext.Accounts.Add(acc);
             dbContext.SaveChanges();
             return acc;
         }
 
-        public async Task<List<Account>> SearchAsync(string keyword)
+        public async Task<List<Account>> SearchAsync()
         {
-            return await dbContext.Accounts
-                .Where(x=>(x.Email+x.FullName).Contains(keyword))
-                .ToListAsync();
+            return  dbContext.Accounts
+                .ToList();
         }
 
         public async Task<Account> GetDetailAsync(int id)
         {
-            return await dbContext.Accounts
+            return  dbContext.Accounts
                 .Where(x => x.AccountId == id)
                 .Include(x=>x.Role)
-                .FirstOrDefaultAsync();
+                .FirstOrDefault();
+        }
+
+        public async Task<Account> UpdateAsync(int accountId, UpdateAccountRequest request)
+        {
+            var acc =  dbContext.Accounts
+                .Where(x => x.AccountId == accountId)
+                .Include(x => x.Role)
+                .FirstOrDefault();
+            if (acc == null)
+            {
+                return null;
+            }
+
+            if ( dbContext.Roles
+                .Where(x => x.RoleId == request.RoleId)
+                .FirstOrDefault() == null)
+            {
+                return null;
+            }
+
+            acc.RoleId = request.RoleId;
+             dbContext.SaveChanges();
+            return acc;
+
         }
     }
 }

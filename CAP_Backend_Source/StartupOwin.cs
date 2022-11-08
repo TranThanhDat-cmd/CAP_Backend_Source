@@ -1,5 +1,6 @@
 ﻿using CAP_Backend_Source.Services;
 using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
@@ -15,8 +16,8 @@ namespace CAP_Backend_Source
     {
         public void Configuration(IAppBuilder app)
         {
-            
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+
+            //app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
             OAuthAuthorizationServerOptions options = new OAuthAuthorizationServerOptions
             {

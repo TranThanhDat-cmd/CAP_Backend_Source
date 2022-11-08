@@ -1,5 +1,6 @@
 ﻿using CAP_Backend_Source.Models;
 using CAP_Backend_Source.Modules.Account.Enum;
+using CAP_Backend_Source.Modules.Account.Request;
 using CAP_Backend_Source.Services;
 using CAP_Backend_Source.Services.User.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -57,7 +58,7 @@ namespace CAP_Backend_UnitTest
                 Email = "Test@gmail.com",
                 Password = "Test"
             });
-            Assert.IsInstanceOfType(acc,typeof(Account));
+            Assert.IsInstanceOfType(acc, typeof(Account));
         }
 
         [TestMethod]
@@ -89,6 +90,28 @@ namespace CAP_Backend_UnitTest
         {
             AccountService accountService = new AccountService();
             var result = await accountService.GetDetailAsync(1);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task Update_Fail()
+        {
+            AccountService accountService = new AccountService();
+            var result = await accountService.UpdateAsync(1, new UpdateAccountRequest()
+            {
+                RoleId = -5346
+            });
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public async Task Update_Success()
+        {
+            AccountService accountService = new AccountService();
+            var result = await accountService.UpdateAsync(1, new UpdateAccountRequest()
+            {
+                RoleId = 1
+            });
             Assert.IsNotNull(result);
         }
     }
